@@ -1,0 +1,19 @@
+digraph tobe {
+  rankdir=TB; fontname="Helvetica"; nodesep=0.5; ranksep=0.32;
+  node [fontname="Helvetica", fontsize=11, shape=box, style="rounded,filled", fillcolor="#E8EEF5", color="#1F3A5F"];
+  edge [fontname="Helvetica", fontsize=9, color="#1F3A5F"];
+  labelloc=t; label="TO-BE checkout flow (5 screens, guest + wallets, cost shown up front)"; fontsize=15;
+
+  cart   [label="1. Cart\nshipping estimate\n+ free-shipping bar", fillcolor="#D5EDE7", color="#2A9D8F"];
+  wallet [label="Express pay\nApple Pay / Google Pay\n(from cart or product page)", shape=box, fillcolor="#D5EDE7", color="#2A9D8F"];
+  choice [label="2. Checkout entry\nGuest (default) /\nSign in / Express", fillcolor="#D5EDE7", color="#2A9D8F"];
+  info   [label="3. Contact, address\n& delivery on one page\n(autocomplete, 7 fields)", fillcolor="#D5EDE7", color="#2A9D8F"];
+  pay    [label="4. Payment\nWallets, card (inline),\nPayPal, saved methods", fillcolor="#D5EDE7", color="#2A9D8F"];
+  auth   [label="3-D Secure 2\n(frictionless where eligible,\nin-page challenge)", fillcolor="#FBE9C9", color="#B7791F"];
+  done   [label="5. Confirmation\n+ optional account\ncreation (one tap)", fillcolor="#D5EDE7", color="#2A9D8F"];
+  retry  [label="Decline / error:\nclear message +\nretry or switch method", shape=box, fillcolor="#FFFFFF", color="#777777", fontcolor="#444444"];
+
+  cart -> wallet [label="express"]; wallet -> done [label="biometric\nconfirm"];
+  cart -> choice -> info -> pay -> auth -> done;
+  auth -> retry [style=dashed, color="#999999"]; retry -> pay [style=dashed, color="#999999"];
+}

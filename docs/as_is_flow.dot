@@ -1,0 +1,23 @@
+digraph asis {
+  rankdir=TB; fontname="Helvetica"; nodesep=0.5; ranksep=0.32;
+  node [fontname="Helvetica", fontsize=11, shape=box, style="rounded,filled", fillcolor="#E8EEF5", color="#1F3A5F"];
+  edge [fontname="Helvetica", fontsize=9, color="#1F3A5F"];
+  labelloc=t; label="AS-IS checkout flow (7 screens, account required)"; fontsize=15;
+
+  cart   [label="1. Cart"];
+  login  [label="2. Login /\nCreate account\n(mandatory)", fillcolor="#F6D9D5", color="#C8483B"];
+  ship   [label="3. Shipping\naddress\n(12 fields)"];
+  deliv  [label="4. Delivery\noptions\n(cost shown here)", fillcolor="#FBE9C9", color="#B7791F"];
+  pay    [label="5. Payment details\nCard or PayPal only\nManual card entry", fillcolor="#F6D9D5", color="#C8483B"];
+  gate   [label="6. Gateway\nauthorisation\n(3-D Secure / redirect)", fillcolor="#F6D9D5", color="#C8483B"];
+  done   [label="7. Order\nconfirmed", fillcolor="#D5EDE7", color="#2A9D8F"];
+  exit   [label="Session lost\n78.7% of carts", shape=oval, fillcolor="#FFFFFF", color="#777777", fontcolor="#555555"];
+
+  cart -> login [label="77.5%"];
+  login -> ship [label="74.1%"];
+  ship -> deliv [label="87.5%"];
+  deliv -> pay [label="82.7%"];
+  pay -> gate [label="75.9%"];
+  gate -> done [label="67.5%"];
+  login -> exit [style=dashed, color="#999999"]; pay -> exit [style=dashed, color="#999999"]; gate -> exit [style=dashed, color="#999999"];
+}
